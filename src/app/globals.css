@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  font-family: var(--font-inter);
+}
+
+.container-custom {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.btn-primary {
+  @apply bg-[#f87f01] text-white px-6 py-3 rounded-md font-medium hover:bg-[#e06c00] transition-colors;
+}
+
+.btn-outline {
+  @apply border-2 border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white/10 transition-colors;
+}
+
+/* Racing-inspired font */
+.font-racing {
+  font-family: var(--font-rajdhani);
+  letter-spacing: 0.025em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Rhombus buttons */
+.rhombus-btn-primary {
+  position: relative;
+  display: inline-block;
+  padding: 14px 30px;
+  background-color: #f87f01;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  transform: skew(-12deg);
+  transition: all 0.3s ease;
+  border: 2px solid #f87f01;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.rhombus-btn-primary span {
+  display: block;
+  transform: skew(12deg);
+}
+
+.rhombus-btn-primary:hover {
+  background-color: #e06c00;
+  transform: skew(-12deg) translateY(-5px);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Rhombus tab buttons for the wheelset specs section */
+.rhombus-btn-tab {
+  position: relative;
+  display: inline-block;
+  transform: skew(-12deg);
+  transition: all 0.3s ease;
+}
+
+.rhombus-btn-tab span {
+  display: block;
+  transform: skew(12deg);
+}
+
+.rhombus-btn-tab:hover {
+  transform: skew(-12deg) translateY(-3px);
+}
+
+/* Rhombus bullet */
+.rhombus-bullet {
+  display: inline-block;
+  transform: skew(-12deg);
+}
+
+.rhombus-btn-outline {
+  position: relative;
+  display: inline-block;
+  padding: 14px 30px;
+  background-color: transparent;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  transform: skew(-12deg);
+  transition: all 0.3s ease;
+  border: 2px solid white;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.rhombus-btn-outline span {
+  display: block;
+  transform: skew(12deg);
+}
+
+.rhombus-btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: skew(-12deg) translateY(-5px);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.rhombus-btn-small {
+  position: relative;
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #f87f01;
+  color: white;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-align: center;
+  transform: skew(-12deg);
+  transition: all 0.3s ease;
+  border: 1px solid #f87f01;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.rhombus-btn-small span {
+  display: block;
+  transform: skew(12deg);
+}
+
+.rhombus-btn-small:hover {
+  background-color: #e06c00;
+  transform: skew(-12deg) translateY(-3px);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-white text-black;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+}
+
+@layer components {
+  .section {
+    @apply py-16 px-4 max-w-7xl mx-auto;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Add new animations for the wheelset page */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+} 
