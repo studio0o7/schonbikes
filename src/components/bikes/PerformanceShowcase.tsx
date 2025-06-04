@@ -1,25 +1,26 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const PerformanceShowcase = () => {
   return (
-    <section className="py-24 bg-black text-white">
+    <section className="py-12 sm:py-16 md:py-24 bg-black text-white">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             <motion.div 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="space-y-8"
+              className="space-y-6 sm:space-y-8"
             >
               <div>
-                <h2 className="text-4xl font-bold mb-4 font-racing text-white">
+                <h2 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 font-racing text-white">
                   Ultimate <span className="text-[#f87f01]">Race Performance</span>
                 </h2>
-                <div className="w-16 h-1 bg-[#f87f01] mb-6"></div>
-                <p className="text-lg text-gray-300 leading-relaxed">
+                <div className="w-16 h-1 bg-[#f87f01] mb-4 sm:mb-6"></div>
+                <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                   The Schönmo Tar Carbon X-Light frame delivers competition-level stiffness and response, with an 
                   integrated cockpit system and wireless SRAM electronic shifting for maximum power transfer.
                 </p>
@@ -34,7 +35,7 @@ const PerformanceShowcase = () => {
                   className="border-l-2 border-[#f87f01] pl-4"
                 >
                   <h3 className="text-white font-bold">Premium Carbon Technology</h3>
-                  <p className="text-gray-400">Schönmo Tar Carbon X-Light frame with vibration dampening design</p>
+                  <p className="text-sm sm:text-base text-gray-400">Schönmo Tar Carbon X-Light frame with vibration dampening design</p>
                 </motion.div>
                 
                 <motion.div 
@@ -45,7 +46,7 @@ const PerformanceShowcase = () => {
                   className="border-l-2 border-[#f87f01] pl-4"
                 >
                   <h3 className="text-white font-bold">Wireless SRAM Shifting</h3>
-                  <p className="text-gray-400">SRAM RED eTap AXS 12-speed for instantaneous gear changes</p>
+                  <p className="text-sm sm:text-base text-gray-400">SRAM RED eTap AXS 12-speed for instantaneous gear changes</p>
                 </motion.div>
                 
                 <motion.div 
@@ -56,7 +57,11 @@ const PerformanceShowcase = () => {
                   className="border-l-2 border-[#f87f01] pl-4"
                 >
                   <h3 className="text-white font-bold">Race-Ready Wheelset</h3>
-                  <p className="text-gray-400">Schönmomo Roll 1 Carbon wheels with 700x32C Premium tires</p>
+                  <p className="text-sm sm:text-base text-gray-400">
+                    <Link href="/wheelset" className="hover:text-[#f87f01] transition-colors">
+                      RAD45 Carbon Aero
+                    </Link> with 700x32C Premium tires
+                  </p>
                 </motion.div>
               </div>
             </motion.div>
@@ -66,7 +71,7 @@ const PerformanceShowcase = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative"
+              className="relative mt-6 lg:mt-0"
             >
               <div className="overflow-hidden">
                 <Image 
@@ -85,8 +90,8 @@ const PerformanceShowcase = () => {
               ></div>
               
               {/* Subtle accent elements */}
-              <div className="absolute -bottom-4 -left-4 w-24 h-24 border border-[#f87f01]/30 rounded-full -z-10"></div>
-              <div className="absolute -top-4 -right-4 w-16 h-16 border border-[#f87f01]/30 -z-10"></div>
+              <div className="absolute -bottom-4 -left-4 w-16 sm:w-24 h-16 sm:h-24 border border-[#f87f01]/30 rounded-full -z-10"></div>
+              <div className="absolute -top-4 -right-4 w-12 sm:w-16 h-12 sm:h-16 border border-[#f87f01]/30 -z-10"></div>
             </motion.div>
           </div>
         </div>

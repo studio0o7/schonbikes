@@ -28,7 +28,7 @@ const RAD45Section = () => {
   }, []);
 
   return (
-    <section id="rad45-section" className="py-24 bg-black overflow-hidden relative">
+    <section id="rad45-section" className="py-12 sm:py-16 md:py-24 bg-black overflow-hidden relative">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-900 to-transparent"></div>
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-gray-900 to-transparent"></div>
@@ -38,19 +38,19 @@ const RAD45Section = () => {
       {/* Grid pattern */}
       <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-5 z-0"></div>
       
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col lg:flex-row-reverse items-center gap-16">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-16">
           {/* Image side */}
           <motion.div 
-            className="lg:w-1/2 relative"
+            className="w-full lg:w-1/2 relative"
             initial={{ opacity: 0, x: 50 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="relative">
               {/* Frame elements */}
-              <div className="absolute -top-4 -left-4 w-16 h-16 border-2 border-[#f87f01]"></div>
-              <div className="absolute -bottom-4 -right-4 w-16 h-16 border-2 border-[#f87f01]"></div>
+              <div className="absolute -top-4 -left-4 w-8 sm:w-16 h-8 sm:h-16 border-2 border-[#f87f01]"></div>
+              <div className="absolute -bottom-4 -right-4 w-8 sm:w-16 h-8 sm:h-16 border-2 border-[#f87f01]"></div>
               
               {/* Main image */}
               <div className="aspect-square overflow-hidden bg-black">
@@ -65,16 +65,16 @@ const RAD45Section = () => {
               </div>
               
               {/* Corner accent */}
-              <div className="absolute top-0 right-0 border-t-[40px] border-r-[40px] border-t-transparent border-r-[#f87f01]"></div>
+              <div className="absolute top-0 right-0 border-t-[30px] sm:border-t-[40px] border-r-[30px] sm:border-r-[40px] border-t-transparent border-r-[#f87f01]"></div>
               
               {/* Badge */}
-              <div className="absolute -bottom-5 left-10 bg-black text-white px-6 py-3 shadow-lg border-2 border-[#f87f01]/80">
-                <span className="text-xl font-bold">50mm Depth</span>
+              <div className="absolute -bottom-4 sm:-bottom-5 left-6 sm:left-10 bg-black text-white px-4 sm:px-6 py-2 sm:py-3 shadow-lg border-2 border-[#f87f01]/80">
+                <span className="text-base sm:text-xl font-bold">50mm Depth</span>
               </div>
             </div>
             
-            {/* Specs badge */}
-            <div className="absolute -right-10 top-1/2 -translate-y-1/2 bg-black/90 backdrop-blur-sm p-4 border-r-2 border-[#f87f01] shadow-lg">
+            {/* Specs badge - hidden on mobile, visible on tablets and up */}
+            <div className="hidden md:block absolute -right-10 top-1/2 -translate-y-1/2 bg-black/90 backdrop-blur-sm p-4 border-r-2 border-[#f87f01] shadow-lg">
               <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-[#f87f01] rounded-full"></div>
@@ -90,11 +90,27 @@ const RAD45Section = () => {
                 </div>
               </div>
             </div>
+            
+            {/* Mobile specs - only visible on mobile */}
+            <div className="md:hidden flex flex-wrap justify-center gap-3 mt-4 bg-black/90 p-3 rounded-lg border-r-2 border-[#f87f01] shadow-lg">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-[#f87f01] rounded-full"></div>
+                <span className="text-white text-xs">1620g per set</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-[#f87f01] rounded-full"></div>
+                <span className="text-white text-xs">28mm wide, 50mm deep</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-[#f87f01] rounded-full"></div>
+                <span className="text-white text-xs">Tubeless Ready</span>
+              </div>
+            </div>
           </motion.div>
           
           {/* Content side */}
           <motion.div 
-            className="lg:w-1/2 text-white"
+            className="w-full lg:w-1/2 text-white mt-8 lg:mt-0"
             initial={{ opacity: 0, x: -50 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -107,46 +123,46 @@ const RAD45Section = () => {
             </div>
             
             {/* Title */}
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 font-racing">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 font-racing">
               RAD <span className="text-[#f87f01]">45</span>
             </h2>
             
             {/* Description */}
-            <div className="mb-8">
-              <p className="text-xl mb-4 text-gray-300">
+            <div className="mb-6 sm:mb-8">
+              <p className="text-lg sm:text-xl mb-3 sm:mb-4 text-gray-300">
                 The Ultimate Road Wheelset
               </p>
-              <p className="text-gray-400 leading-relaxed mb-4">
+              <p className="text-sm sm:text-base text-gray-400 leading-relaxed mb-3 sm:mb-4">
                 Engineered for maximum speed and efficiency on the road, the RAD 45 wheelset combines cutting-edge aerodynamics with exceptional stability. The 28mm width and 50mm depth profile strikes the perfect balance between aerodynamic advantage and crosswind stability.
               </p>
-              <p className="text-gray-400 leading-relaxed mb-4">
+              <p className="text-sm sm:text-base text-gray-400 leading-relaxed mb-3 sm:mb-4">
                 Optimized for modern road tires, these wheels deliver superior rolling resistance and cornering grip, giving you the confidence to push your limits.
               </p>
             </div>
             
             {/* Features */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <div className="bg-black/30 p-4 border-l-2 border-[#f87f01] shadow-sm">
-                <h3 className="text-lg font-semibold mb-2">Tubeless-Ready Clincher</h3>
-                <p className="text-sm text-gray-400">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
+              <div className="bg-black/30 p-3 sm:p-4 border-l-2 border-[#f87f01] shadow-sm">
+                <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">Tubeless-Ready Clincher</h3>
+                <p className="text-xs sm:text-sm text-gray-400">
                   Specific angle drilling for optimal strength and aerodynamics.
                 </p>
               </div>
-              <div className="bg-black/30 p-4 border-l-2 border-[#f87f01] shadow-sm">
-                <h3 className="text-lg font-semibold mb-2">Schonroad Centerlock Hubs</h3>
-                <p className="text-sm text-gray-400">
+              <div className="bg-black/30 p-3 sm:p-4 border-l-2 border-[#f87f01] shadow-sm">
+                <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">Schonroad Centerlock Hubs</h3>
+                <p className="text-xs sm:text-sm text-gray-400">
                   Precision engineered with locking bearings and black satin anodized finish.
                 </p>
               </div>
-              <div className="bg-black/30 p-4 border-l-2 border-[#f87f01] shadow-sm">
-                <h3 className="text-lg font-semibold mb-2">Aero Spokes</h3>
-                <p className="text-sm text-gray-400">
+              <div className="bg-black/30 p-3 sm:p-4 border-l-2 border-[#f87f01] shadow-sm">
+                <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">Aero Spokes</h3>
+                <p className="text-xs sm:text-sm text-gray-400">
                   Pillar straight-pull with black finish and double butted aero profile.
                 </p>
               </div>
-              <div className="bg-black/30 p-4 border-l-2 border-[#f87f01] shadow-sm">
-                <h3 className="text-lg font-semibold mb-2">Ultralight Carbon Layup</h3>
-                <p className="text-sm text-gray-400">
+              <div className="bg-black/30 p-3 sm:p-4 border-l-2 border-[#f87f01] shadow-sm">
+                <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">Ultralight Carbon Layup</h3>
+                <p className="text-xs sm:text-sm text-gray-400">
                   Unidirectional carbon construction for optimal strength-to-weight ratio.
                 </p>
               </div>
@@ -160,10 +176,10 @@ const RAD45Section = () => {
             >
               <button 
                 onClick={() => document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' })} 
-                className="cursor-pointer"
+                className="w-full sm:w-auto cursor-pointer"
               >
                 <div className="rhombus-btn-primary relative overflow-hidden group">
-                  <span className="relative z-10">Request Order</span>
+                  <span className="relative z-10 text-sm sm:text-base">Request Order</span>
                   <motion.div 
                     initial={{ x: "-100%" }}
                     whileHover={{ x: "0%" }}

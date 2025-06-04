@@ -26,12 +26,24 @@ export default function Header() {
     }
   };
 
-  const handleGetFittedClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (isHomePage) {
-      e.preventDefault();
-      scrollToContact();
-      setIsMenuOpen(false);
+  const scrollToLastSection = () => {
+    // Get all sections on the page
+    const sections = document.querySelectorAll('section');
+    // Get the last section
+    const lastSection = sections[sections.length - 1];
+    if (lastSection) {
+      lastSection.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleGetFittedClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (isHomePage) {
+      scrollToContact();
+    } else {
+      scrollToLastSection();
+    }
+    setIsMenuOpen(false);
   };
 
   return (
@@ -140,6 +152,14 @@ export default function Header() {
             <span className="absolute h-full w-full bg-[#f87f01]/5 top-0 left-0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center -z-10"></span>
           </Link>
           
+          <Link href="/saddles" className="group relative py-2 px-1 overflow-hidden">
+            <span className="font-medium text-gray-700 group-hover:text-[#f87f01] transition-all duration-300 ease-out tracking-wide">
+              Saddles
+            </span>
+            <span className="absolute h-0.5 w-0 bg-[#f87f01] bottom-0 left-1/2 transform -translate-x-1/2 group-hover:w-full transition-all duration-300 ease-out"></span>
+            <span className="absolute h-full w-full bg-[#f87f01]/5 top-0 left-0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center -z-10"></span>
+          </Link>
+          
           <Link href="/about" className="group relative py-2 px-1 overflow-hidden">
             <span className="font-medium text-gray-700 group-hover:text-[#f87f01] transition-all duration-300 ease-out tracking-wide">
               About Us
@@ -152,7 +172,7 @@ export default function Header() {
         {/* Enhanced Action Button */}
         <div className="hidden md:block">
           <Link 
-            href={isHomePage ? "#" : "/custom"} 
+            href="#" 
             className="transform hover:scale-105 transition-transform duration-300 group"
             onClick={handleGetFittedClick}
           >
@@ -252,6 +272,14 @@ export default function Header() {
             </Link>
             
             <Link 
+              href="/saddles" 
+              className="font-medium text-gray-700 hover:text-[#f87f01] transition-colors duration-200 py-3 px-3 border-l-2 border-transparent hover:border-[#f87f01] relative group rounded-md hover:bg-[#f87f01]/5"
+              onClick={() => { setIsMenuOpen(false); setBikesDropdownOpen(false); }}
+            >
+              Saddles
+            </Link>
+            
+            <Link 
               href="/about" 
               className="font-medium text-gray-700 hover:text-[#f87f01] transition-colors duration-200 py-3 px-3 border-l-2 border-transparent hover:border-[#f87f01] relative group rounded-md hover:bg-[#f87f01]/5"
               onClick={() => { setIsMenuOpen(false); setBikesDropdownOpen(false); }}
@@ -261,7 +289,7 @@ export default function Header() {
             
             <div className="pt-4 pb-2">
               <Link 
-                href={isHomePage ? "#" : "/custom"}
+                href="#"
                 className="inline-block w-full text-center bg-[#f87f01] text-white font-semibold py-3.5 px-4 
                            transform skew-x-[-12deg] hover:bg-[#f87f01]/90 transition-all duration-300 group relative overflow-hidden
                            border border-[#f87f01]"

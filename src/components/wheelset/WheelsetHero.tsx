@@ -25,7 +25,7 @@ const WheelsetHero = () => {
   };
 
   return (
-    <section className="relative h-screen bg-black overflow-hidden">
+    <section className="relative min-h-screen bg-black overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-1/3 h-32 bg-gradient-to-l from-[#f87f01]/20 to-transparent z-10"></div>
       <div className="absolute bottom-0 left-0 w-1/3 h-32 bg-gradient-to-r from-[#f87f01]/20 to-transparent z-10"></div>
@@ -34,45 +34,38 @@ const WheelsetHero = () => {
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-5 z-10"></div>
       
-      <div className="container mx-auto h-full relative z-20">
-        <div className="flex flex-col lg:flex-row h-full">
+      <div className="container mx-auto h-full relative z-20 px-4 sm:px-6">
+        <div className="flex flex-col lg:flex-row h-full py-12 lg:py-0">
           {/* Images on left side with frame */}
-          <div className="lg:w-1/2 h-full relative flex items-center justify-center p-8">
+          <div className="lg:w-1/2 relative flex items-center justify-center p-4 sm:p-8 mb-8 lg:mb-0">
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 1, delay: 0.2 }}
-              className="w-full h-4/5 relative rounded-lg overflow-hidden"
+              className="w-full h-[300px] sm:h-[400px] lg:h-4/5 relative rounded-lg overflow-hidden"
             >
               {/* Design elements */}
-              <div className="absolute -top-4 -left-4 w-16 h-16 border-2 border-[#f87f01] z-20"></div>
-              <div className="absolute -bottom-4 -right-4 w-16 h-16 border-2 border-[#f87f01] z-20"></div>
-              
-              {/* Image overlay gradients */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/50 z-10"></div>
-              <div className="absolute inset-0 bg-gradient-to-r from-black to-transparent z-10 opacity-40"></div>
+              <div className="absolute -top-4 -left-4 w-8 sm:w-16 h-8 sm:h-16 border-2 border-[#f87f01] z-20"></div>
+              <div className="absolute -bottom-4 -right-4 w-8 sm:w-16 h-8 sm:h-16 border-2 border-[#f87f01] z-20"></div>
               
               {/* Wheelset Image */}
               <Image 
-                src="/images/wheelset-hero.jpg" 
+                src="/images/Wheelsetmain.png" 
                 alt="SchönMO Premium Wheelsets"
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-contain"
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 640px) 90vw, (max-width: 768px) 80vw, (max-width: 1024px) 50vw, 40vw"
                 priority
               />
               
-              {/* Corner accent */}
-              <div className="absolute top-0 right-0 border-t-[50px] border-r-[50px] border-t-transparent border-r-[#f87f01] z-20"></div>
-              
               {/* Image badge */}
-              <div className="absolute bottom-6 left-6 bg-black/80 backdrop-blur-sm px-4 py-2 rounded z-20 border-l-2 border-[#f87f01]">
+              <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 bg-black/80 backdrop-blur-sm px-3 py-1 sm:px-4 sm:py-2 z-20 border-l-2 border-[#f87f01]">
                 <span className="text-xs text-white/70 uppercase tracking-wider">SchönMO Premium</span>
               </div>
             </motion.div>
             
-            {/* Side badge */}
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 rotate-90 origin-left">
+            {/* Side badge - hide on small screens */}
+            <div className="hidden sm:block absolute top-1/2 left-0 -translate-y-1/2 rotate-90 origin-left">
               <div className="bg-[#f87f01] text-black text-xs tracking-[0.25em] py-1 px-3 uppercase font-bold">
                 Wheelset Series
               </div>
@@ -81,13 +74,13 @@ const WheelsetHero = () => {
           
           {/* Content on right side */}
           <div className="lg:w-1/2 flex items-center justify-center">
-            <div className="text-white px-8 py-12 max-w-lg">
+            <div className="text-white px-0 sm:px-8 py-6 sm:py-12 max-w-lg">
               {/* Eyebrow text */}
               <motion.p
                 initial={{ opacity: 0, y: -10 }}
                 animate={isLoaded ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-sm font-medium tracking-widest mb-4 uppercase text-[#f87f01] drop-shadow-[0_2px_3px_rgba(0,0,0,0.9)]"
+                className="text-xs sm:text-sm font-medium tracking-widest mb-3 sm:mb-4 uppercase text-[#f87f01] drop-shadow-[0_2px_3px_rgba(0,0,0,0.9)]"
               >
                 German Engineering • Premium Carbon Wheelsets
               </motion.p>
@@ -97,11 +90,11 @@ const WheelsetHero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isLoaded ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.6 }}
-                className="text-5xl lg:text-7xl font-bold mb-4 leading-tight font-racing"
+                className="text-3xl sm:text-5xl lg:text-7xl font-bold mb-3 sm:mb-4 leading-tight font-racing"
               >
                 RAD
                 <div className="relative inline-block">
-                  <span className="text-[#f87f01] block mt-2">Wheelsets</span>
+                  <span className="text-[#f87f01] block mt-1 sm:mt-2">Wheelsets</span>
                   <motion.div 
                     initial={{ width: "0%" }}
                     animate={isLoaded ? { width: "100%" } : {}}
@@ -116,8 +109,8 @@ const WheelsetHero = () => {
                 animate={isLoaded ? { opacity: 1 } : {}}
                 transition={{ duration: 0.6, delay: 0.8 }}
               >
-                <p className="text-2xl mb-6 text-gray-300 font-light">Performance Carbon Wheelsets</p>
-                <p className="text-lg mb-8 leading-relaxed text-gray-400">
+                <p className="text-xl sm:text-2xl mb-4 sm:mb-6 text-gray-300 font-light">Performance Carbon Wheelsets</p>
+                <p className="text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed text-gray-400">
                   Engineered for the ultimate ride experience. Our premium carbon wheelsets deliver unmatched performance for both road and gravel riding. Lightweight, aerodynamic, and incredibly responsive.
                 </p>
               </motion.div>
@@ -127,19 +120,19 @@ const WheelsetHero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isLoaded ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 1 }}
-                className="flex flex-wrap gap-4 mb-8"
+                className="flex flex-wrap gap-2 sm:gap-4 mb-6 sm:mb-8"
               >
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-[#f87f01] rounded-full"></div>
-                  <span className="text-sm text-gray-300">Carbon Construction</span>
+                  <span className="text-xs sm:text-sm text-gray-300">Carbon Construction</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-[#f87f01] rounded-full"></div>
-                  <span className="text-sm text-gray-300">Tubeless Ready</span>
+                  <span className="text-xs sm:text-sm text-gray-300">Tubeless Ready</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-[#f87f01] rounded-full"></div>
-                  <span className="text-sm text-gray-300">Road & Gravel Options</span>
+                  <span className="text-xs sm:text-sm text-gray-300">Road & Gravel Options</span>
                 </div>
               </motion.div>
               
@@ -148,7 +141,7 @@ const WheelsetHero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isLoaded ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 1.2 }}
-                className="flex flex-col sm:flex-row gap-6"
+                className="flex flex-col sm:flex-row gap-4 sm:gap-6"
               >
                 <motion.div
                   whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
@@ -156,10 +149,10 @@ const WheelsetHero = () => {
                 >
                   <button 
                     onClick={() => scrollToSection('specifications')} 
-                    className="cursor-pointer"
+                    className="w-full sm:w-auto cursor-pointer"
                   >
                     <div className="rhombus-btn-primary relative overflow-hidden group">
-                      <span className="relative z-10">View Specifications</span>
+                      <span className="relative z-10 text-sm sm:text-base">View Specifications</span>
                       <motion.div 
                         initial={{ x: "-100%" }}
                         whileHover={{ x: "0%" }}
@@ -176,10 +169,10 @@ const WheelsetHero = () => {
                 >
                   <button 
                     onClick={() => scrollToSection('order')} 
-                    className="cursor-pointer"
+                    className="w-full sm:w-auto cursor-pointer"
                   >
                     <div className="rhombus-btn-outline relative overflow-hidden group">
-                      <span className="relative z-10">Request Order</span>
+                      <span className="relative z-10 text-sm sm:text-base">Request Order</span>
                       <motion.div 
                         initial={{ x: "-100%" }}
                         whileHover={{ x: "0%" }}

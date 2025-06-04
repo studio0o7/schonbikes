@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { sendEmail } from '@/utils/emailService';
 
 const OrderRequest = () => {
   const [formState, setFormState] = useState({
@@ -13,6 +14,7 @@ const OrderRequest = () => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -26,57 +28,100 @@ const OrderRequest = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
+    try {
+      const result = await sendEmail({
+        subject: `New Wheelset Order Request: ${formState.name} - ${formState.wheelsetType}`,
+        message: `
+Name: ${formState.name}
+Email: ${formState.email}
+Phone: ${formState.phone || 'Not provided'}
+
+Order Details:
+Wheelset Type: ${formState.wheelsetType}
+Freehub Type: ${formState.hubType}
+
+Additional Requirements:
+${formState.comments || 'None specified'}
+        `,
+        htmlMessage: `
+<div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+  <h2 style="color: #f87f01;">New Wheelset Order Request</h2>
+  
+  <h3 style="margin-top: 20px;">Customer Information</h3>
+  <p><strong>Name:</strong> ${formState.name}</p>
+  <p><strong>Email:</strong> ${formState.email}</p>
+  <p><strong>Phone:</strong> ${formState.phone || 'Not provided'}</p>
+  
+  <h3 style="margin-top: 20px;">Order Details</h3>
+  <p><strong>Wheelset Type:</strong> ${formState.wheelsetType === 'rad35' ? 'RAD 35 (Gravel)' : 
+    formState.wheelsetType === 'rad45' ? 'RAD 45 (Road)' : 'Both RAD 35 & RAD 45'}</p>
+  <p><strong>Freehub Type:</strong> ${formState.hubType === 'shimano' ? 'Shimano/SRAM 11-speed' : 
+    formState.hubType === 'xdr' ? 'SRAM XDR' : 'Campagnolo'}</p>
+  
+  <h3 style="margin-top: 20px;">Additional Requirements</h3>
+  <p>${formState.comments || 'None specified'}</p>
+</div>
+        `
+      });
       
-      // Reset form after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormState({
-          name: '',
-          email: '',
-          phone: '',
-          wheelsetType: 'rad35',
-          hubType: 'shimano',
-          comments: ''
-        });
-      }, 5000);
-    }, 2000);
+      if (result.success) {
+        setIsSubmitted(true);
+        setErrorMessage('');
+        
+        // Reset form after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setFormState({
+            name: '',
+            email: '',
+            phone: '',
+            wheelsetType: 'rad35',
+            hubType: 'shimano',
+            comments: ''
+          });
+        }, 5000);
+      } else {
+        throw new Error(result.error || 'Failed to submit order request');
+      }
+    } catch (error) {
+      console.error('Error submitting wheelset order:', error);
+      setErrorMessage(error instanceof Error ? error.message : 'Failed to submit order request');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   return (
-    <section id="order" className="py-24 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
+    <section id="order" className="py-12 sm:py-16 md:py-24 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-5 z-0"></div>
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black to-transparent"></div>
       <div className="absolute -right-48 bottom-1/3 w-96 h-96 rounded-full bg-[#f87f01]/10 blur-3xl"></div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-white font-racing">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white font-racing">
               Request <span className="text-[#f87f01]">Order</span>
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
               Fill out the form below to request an order for your custom wheelset. Our team will contact you within 24 hours to discuss your options and provide a quote.
             </p>
           </div>
           
           {/* Order Form */}
-          <div className="bg-gray-900/30 backdrop-blur-sm rounded-xl p-8 border border-gray-800">
+          <div className="bg-gray-900/30 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 border border-gray-800">
             {isSubmitted ? (
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-center py-12"
+                className="text-center py-8 sm:py-12"
               >
-                <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-12 sm:w-16 h-12 sm:h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
-                    className="h-8 w-8 text-green-500" 
+                    className="h-6 sm:h-8 w-6 sm:w-8 text-green-500" 
                     fill="none" 
                     viewBox="0 0 24 24" 
                     stroke="currentColor"
@@ -84,17 +129,23 @@ const OrderRequest = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Request Submitted!</h3>
-                <p className="text-gray-400 mb-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Request Submitted!</h3>
+                <p className="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6">
                   Thank you for your interest in SchönMO wheelsets. Our team will contact you shortly to discuss your requirements.
                 </p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                {errorMessage && (
+                  <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-center">
+                    <p className="text-red-400">{errorMessage}</p>
+                  </div>
+                )}
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                   {/* Name */}
                   <div>
-                    <label htmlFor="name" className="block text-white mb-2 font-medium">
+                    <label htmlFor="name" className="block text-white mb-1 sm:mb-2 text-sm sm:text-base font-medium">
                       Full Name
                     </label>
                     <input
@@ -104,14 +155,14 @@ const OrderRequest = () => {
                       value={formState.name}
                       onChange={handleChange}
                       required
-                      className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#f87f01] focus:border-transparent transition"
+                      className="w-full bg-black/50 border border-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-[#f87f01] focus:border-transparent transition"
                       placeholder="Enter your full name"
                     />
                   </div>
                   
                   {/* Email */}
                   <div>
-                    <label htmlFor="email" className="block text-white mb-2 font-medium">
+                    <label htmlFor="email" className="block text-white mb-1 sm:mb-2 text-sm sm:text-base font-medium">
                       Email Address
                     </label>
                     <input
@@ -121,14 +172,14 @@ const OrderRequest = () => {
                       value={formState.email}
                       onChange={handleChange}
                       required
-                      className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#f87f01] focus:border-transparent transition"
+                      className="w-full bg-black/50 border border-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-[#f87f01] focus:border-transparent transition"
                       placeholder="Enter your email address"
                     />
                   </div>
                   
                   {/* Phone */}
                   <div>
-                    <label htmlFor="phone" className="block text-white mb-2 font-medium">
+                    <label htmlFor="phone" className="block text-white mb-1 sm:mb-2 text-sm sm:text-base font-medium">
                       Phone Number
                     </label>
                     <input
@@ -137,14 +188,14 @@ const OrderRequest = () => {
                       name="phone"
                       value={formState.phone}
                       onChange={handleChange}
-                      className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#f87f01] focus:border-transparent transition"
+                      className="w-full bg-black/50 border border-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-[#f87f01] focus:border-transparent transition"
                       placeholder="Enter your phone number (optional)"
                     />
                   </div>
                   
                   {/* Wheelset Type */}
                   <div>
-                    <label htmlFor="wheelsetType" className="block text-white mb-2 font-medium">
+                    <label htmlFor="wheelsetType" className="block text-white mb-1 sm:mb-2 text-sm sm:text-base font-medium">
                       Wheelset Type
                     </label>
                     <select
@@ -153,7 +204,7 @@ const OrderRequest = () => {
                       value={formState.wheelsetType}
                       onChange={handleChange}
                       required
-                      className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#f87f01] focus:border-transparent transition"
+                      className="w-full bg-black/50 border border-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-[#f87f01] focus:border-transparent transition"
                     >
                       <option value="rad35">RAD 35 (Gravel)</option>
                       <option value="rad45">RAD 45 (Road)</option>
@@ -163,7 +214,7 @@ const OrderRequest = () => {
                   
                   {/* Hub Type */}
                   <div>
-                    <label htmlFor="hubType" className="block text-white mb-2 font-medium">
+                    <label htmlFor="hubType" className="block text-white mb-1 sm:mb-2 text-sm sm:text-base font-medium">
                       Freehub Type
                     </label>
                     <select
@@ -172,7 +223,7 @@ const OrderRequest = () => {
                       value={formState.hubType}
                       onChange={handleChange}
                       required
-                      className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#f87f01] focus:border-transparent transition"
+                      className="w-full bg-black/50 border border-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-[#f87f01] focus:border-transparent transition"
                     >
                       <option value="shimano">Shimano/SRAM 11-speed</option>
                       <option value="xdr">SRAM XDR</option>
@@ -182,7 +233,7 @@ const OrderRequest = () => {
                   
                   {/* Comments */}
                   <div className="md:col-span-2">
-                    <label htmlFor="comments" className="block text-white mb-2 font-medium">
+                    <label htmlFor="comments" className="block text-white mb-1 sm:mb-2 text-sm sm:text-base font-medium">
                       Additional Requirements
                     </label>
                     <textarea
@@ -191,7 +242,7 @@ const OrderRequest = () => {
                       value={formState.comments}
                       onChange={handleChange}
                       rows={4}
-                      className="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#f87f01] focus:border-transparent transition"
+                      className="w-full bg-black/50 border border-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-white focus:outline-none focus:ring-2 focus:ring-[#f87f01] focus:border-transparent transition"
                       placeholder="Let us know if you have any specific requirements or questions..."
                     ></textarea>
                   </div>
@@ -210,10 +261,10 @@ const OrderRequest = () => {
                       className="cursor-pointer"
                     >
                       <div className="rhombus-btn-primary relative overflow-hidden group">
-                        <span className="relative z-10">
+                        <span className="relative z-10 text-sm sm:text-base">
                           {isSubmitting ? (
                             <span className="flex items-center justify-center">
-                              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <svg className="animate-spin -ml-1 mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                               </svg>

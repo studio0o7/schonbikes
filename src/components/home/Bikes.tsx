@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 export default function Bikes() {
   return (
-    <section className="py-16 bg-white relative overflow-hidden">
+    <section className="py-12 md:py-16 bg-white relative overflow-hidden">
       {/* Abstract design elements */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
         <div className="absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-br from-[#f87f01]/10 to-transparent rounded-full blur-3xl"></div>
@@ -23,10 +23,10 @@ export default function Bikes() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-10"
+          className="text-center mb-8 md:mb-10"
         >
-          <span className="inline-block text-xs font-semibold tracking-[0.25em] text-[#f87f01] uppercase mb-2 px-4 py-1 border border-[#f87f01]/30 rounded-full">Premium Collection</span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 font-racing text-black">
+          <span className="inline-block text-xs font-semibold tracking-[0.25em] text-[#f87f01] uppercase mb-2 px-3 sm:px-4 py-1 border border-[#f87f01]/30 rounded-full">Premium Collection</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 font-racing text-black">
             Our <span className="text-[#f87f01] relative inline-block">
               Bikes
               <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 100 15" preserveAspectRatio="none">
@@ -34,13 +34,13 @@ export default function Bikes() {
               </svg>
             </span>
           </h2>
-          <div className="w-16 h-1 bg-[#f87f01] mx-auto mb-4"></div>
-          <p className="text-lg max-w-2xl mx-auto text-black font-semibold">
+          <div className="w-12 sm:w-16 h-1 bg-[#f87f01] mx-auto mb-3 md:mb-4"></div>
+          <p className="text-base md:text-lg max-w-2xl mx-auto text-black font-semibold">
             Precision-engineered machines built for speed, performance, and your unique body measurements
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-4">
           {/* Performance Bike */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -52,7 +52,7 @@ export default function Bikes() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-[#f87f01]/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
             <div className="bg-white rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl relative border border-gray-200 group-hover:border-[#f87f01]/30 h-full">
-              <div className="relative h-64 md:h-72">
+              <div className="relative h-48 sm:h-56 md:h-64 lg:h-72">
                 <Image 
                   src="/images/Road1.png"
                   alt="SchönMO Performance Bike" 
@@ -68,10 +68,10 @@ export default function Bikes() {
                   Performance Series
                 </div>
               </div>
-              <div className="p-5 relative">
-                <h3 className="text-xl font-bold mb-2 font-racing text-black">SchönMO <span className="text-[#f87f01]">Pro Carbon</span></h3>
-                <div className="w-10 h-0.5 bg-[#f87f01] mb-3"></div>
-                <p className="text-black mb-4 font-bold text-sm">
+              <div className="p-4 md:p-5 relative">
+                <h3 className="text-lg md:text-xl font-bold mb-2 font-racing text-black">SchönMO <span className="text-[#f87f01]">One Road</span></h3>
+                <div className="w-8 md:w-10 h-0.5 bg-[#f87f01] mb-2 md:mb-3"></div>
+                <p className="text-black mb-3 md:mb-4 font-bold text-xs sm:text-sm">
                   Our flagship performance model engineered for competitive riders who demand the absolute best in speed and responsiveness.
                 </p>
                 <div className="flex flex-wrap gap-1 mb-4">
@@ -83,7 +83,7 @@ export default function Bikes() {
                   <motion.div 
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
-                    className="rhombus-btn-primary relative overflow-hidden inline-block text-sm"
+                    className="rhombus-btn-primary relative overflow-hidden inline-block text-xs sm:text-sm"
                   >
                     <span className="relative z-10">View Details</span>
                     <motion.div 
@@ -99,7 +99,7 @@ export default function Bikes() {
             
             {/* Design accents */}
             <div className="absolute -bottom-2 -right-2 w-full h-full border border-[#f87f01]/40 rounded-xl -z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
-            <div className="absolute -bottom-3 -left-3 w-16 h-16 border-2 border-[#f87f01]/30 -z-10"></div>
+            <div className="absolute -bottom-3 -left-3 w-12 md:w-16 h-12 md:h-16 border-2 border-[#f87f01]/30 -z-10"></div>
           </motion.div>
           
           {/* Endurance Bike */}
@@ -113,7 +113,7 @@ export default function Bikes() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-[#f87f01]/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
             <div className="bg-white rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl relative border border-gray-200 group-hover:border-[#f87f01]/30 h-full">
-              <div className="relative h-64 md:h-72">
+              <div className="relative h-48 sm:h-56 md:h-64 lg:h-72">
                 <Image 
                   src="/images/Gravel2.png"
                   alt="SchönMO Endurance Bike" 
@@ -129,10 +129,10 @@ export default function Bikes() {
                   Adventure Series
                 </div>
               </div>
-              <div className="p-5 relative">
-                <h3 className="text-xl font-bold mb-2 font-racing text-black">SchönMO <span className="text-[#f87f01]">Enduro Elite</span></h3>
-                <div className="w-10 h-0.5 bg-[#f87f01] mb-3"></div>
-                <p className="text-black mb-4 font-bold text-sm">
+              <div className="p-4 md:p-5 relative">
+                <h3 className="text-lg md:text-xl font-bold mb-2 font-racing text-black">SchönMO <span className="text-[#f87f01]">One Adventure</span></h3>
+                <div className="w-8 md:w-10 h-0.5 bg-[#f87f01] mb-2 md:mb-3"></div>
+                <p className="text-black mb-3 md:mb-4 font-bold text-xs sm:text-sm">
                   Designed for the long haul with a perfect balance of comfort and performance to keep you riding stronger, longer.
                 </p>
                 <div className="flex flex-wrap gap-1 mb-4">
@@ -144,7 +144,7 @@ export default function Bikes() {
                   <motion.div 
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
-                    className="rhombus-btn-primary relative overflow-hidden inline-block text-sm"
+                    className="rhombus-btn-primary relative overflow-hidden inline-block text-xs sm:text-sm"
                   >
                     <span className="relative z-10">View Details</span>
                     <motion.div 
@@ -160,7 +160,7 @@ export default function Bikes() {
             
             {/* Design accents */}
             <div className="absolute -bottom-2 -right-2 w-full h-full border border-[#f87f01]/40 rounded-xl -z-20 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1 group-hover:translate-y-1"></div>
-            <div className="absolute -top-3 -right-3 w-16 h-16 border-2 border-[#f87f01]/30 -z-10"></div>
+            <div className="absolute -top-3 -right-3 w-12 md:w-16 h-12 md:h-16 border-2 border-[#f87f01]/30 -z-10"></div>
           </motion.div>
         </div>
       </div>

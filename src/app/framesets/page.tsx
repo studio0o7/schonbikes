@@ -8,7 +8,7 @@ import OrderRequestSection from '@/components/framesets/OrderRequestSection';
 
 export default function Framesets() {
   return (
-    <main className="pt-0 pb-24">
+    <main className="pt-0 pb-16 sm:pb-20 md:pb-24">
       <HeroSection />
       <GeometrySection />
       <DesignDetailsSection />
