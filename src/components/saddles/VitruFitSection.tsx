@@ -3,8 +3,29 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 const VitruFitSection = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    // Check if we're on the client side
+    if (typeof window !== 'undefined') {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth < 768);
+      };
+      
+      // Initial check
+      checkMobile();
+      
+      // Add event listener for window resize
+      window.addEventListener('resize', checkMobile);
+      
+      // Cleanup
+      return () => window.removeEventListener('resize', checkMobile);
+    }
+  }, []);
+
   const [ref2, inView2] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -65,14 +86,16 @@ const VitruFitSection = () => {
                 <div className="absolute -right-20 -top-20 w-40 h-40 bg-[#f87f01]/10 rounded-full blur-2xl z-0"></div>
                 
                 {/* Elevated Rear Design image */}
-                <div className="relative h-60 sm:h-80 overflow-hidden z-10">
+                <div className="relative h-64 sm:h-60 md:h-80 w-full overflow-hidden z-10">
                   <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent z-10 pointer-events-none"></div>
                   <Image 
                     src="/images/saddleside.png" 
                     alt="Elevated Rear Design"
-                    fill
-                    className="object-cover object-center scale-[1.02]"
-                    style={{ filter: 'contrast(1.05)' }}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover w-full h-full"
+                    width={800}
+                    height={600}
+                    priority
                   />
                   <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-black/70 px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs text-white/90 border-r-2 border-[#f87f01] z-20">
                     Elevated Design
@@ -119,28 +142,49 @@ const VitruFitSection = () => {
                 </li>
               </ul>
             </div>
-            <div className="md:w-1/2">
-              <div className="relative overflow-hidden bg-white shadow-lg p-2 transform hover:scale-[1.02] transition-transform duration-300">
-                {/* Decorative elements - hide on very small screens */}
-                <div className="absolute top-0 right-0 w-8 sm:w-12 h-8 sm:h-12 border-t-2 border-r-2 border-[#f87f01] z-10 hidden sm:block"></div>
-                <div className="absolute bottom-0 left-0 w-8 sm:w-12 h-8 sm:h-12 border-b-2 border-l-2 border-[#f87f01] z-10 hidden sm:block"></div>
-                <div className="absolute -left-20 -bottom-20 w-40 h-40 bg-[#f87f01]/10 rounded-full blur-2xl z-0"></div>
-                
-                {/* Relief Channel image - rotated 90 degrees */}
-                <div className="relative flex items-center justify-center h-56 sm:h-72">
-                  <Image 
-                    src="/images/SaddleTop.png" 
-                    alt="Extended Relief Channel"
-                    width={400}
-                    height={300}
-                    className="transform rotate-90 object-contain max-w-full h-auto"
-                    style={{ transformOrigin: 'center' }}
-                  />
-                  <div className="absolute top-2 sm:top-4 left-2 sm:left-4 bg-black/70 px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs text-white/90 border-l-2 border-[#f87f01] z-20">
-                    Pressure Relief
+            
+            {/* Image section - Full width on mobile, 50% on desktop */}
+            <div className="w-full md:w-1/2">
+              {isMobile ? (
+                <div className="w-full px-2 py-6">
+                  <div className="relative mx-auto w-full max-w-[300px] h-72 bg-white shadow-lg rounded-md p-3">
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      <Image 
+                        src="/images/SaddleTop.png" 
+                        alt="Extended Relief Channel"
+                        width={400} 
+                        height={400}
+                        className="object-contain rotate-90 scale-110"
+                        priority
+                      />
+                    </div>
+                    <div className="absolute top-2 left-2 bg-black/70 px-2 py-1 text-[10px] text-white/90 border-l-2 border-[#f87f01] z-20">
+                      Pressure Relief
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div className="relative overflow-hidden bg-white shadow-lg p-3 transform hover:scale-[1.02] transition-transform duration-300 w-[85%] mx-auto">
+                  {/* Decorative elements - desktop only */}
+                  <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-[#f87f01] z-10"></div>
+                  <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-[#f87f01] z-10"></div>
+                  <div className="absolute -left-24 -bottom-24 w-56 h-56 bg-[#f87f01]/10 rounded-full blur-3xl z-0"></div>
+                  
+                  <div className="relative h-80 w-full">
+                    <Image 
+                      src="/images/SaddleTop.png" 
+                      alt="Extended Relief Channel"
+                      fill
+                      className="object-contain transform rotate-90 scale-[1.6]"
+                      sizes="50vw"
+                      priority
+                    />
+                    <div className="absolute top-4 left-4 bg-black/70 px-3 py-1.5 text-xs text-white/90 border-l-2 border-[#f87f01] z-20">
+                      Pressure Relief
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </motion.div>
         </div>
@@ -189,13 +233,16 @@ const VitruFitSection = () => {
                 <div className="absolute -right-20 -top-20 w-40 h-40 bg-[#f87f01]/10 rounded-full blur-2xl z-0"></div>
                 
                 {/* Perfect Fit System image */}
-                <div className="relative h-60 sm:h-80 overflow-hidden z-10">
+                <div className="relative h-48 sm:h-60 md:h-80 w-full overflow-hidden z-10">
                   <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent z-10 pointer-events-none"></div>
                   <Image 
                     src="/images/Sizesaddle.png" 
                     alt="Perfect Fit System"
-                    fill
-                    className="object-contain"
+                    width={800}
+                    height={600}
+                    className="object-contain w-full h-full"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
                   />
                   <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-black/70 px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs text-white/90 border-r-2 border-[#f87f01] z-20">
                     Size Options
