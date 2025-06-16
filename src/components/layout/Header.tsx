@@ -2,14 +2,11 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [bikesDropdownOpen, setBikesDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
-  const isHomePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,32 +16,7 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact-section');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
-  const scrollToLastSection = () => {
-    // Get all sections on the page
-    const sections = document.querySelectorAll('section');
-    // Get the last section
-    const lastSection = sections[sections.length - 1];
-    if (lastSection) {
-      lastSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleGetFittedClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    if (isHomePage) {
-      scrollToContact();
-    } else {
-      scrollToLastSection();
-    }
-    setIsMenuOpen(false);
-  };
 
   return (
     <header 
@@ -171,16 +143,12 @@ export default function Header() {
 
         {/* Enhanced Action Button */}
         <div className="hidden md:block">
-          <Link 
-            href="#" 
-            className="transform hover:scale-105 transition-transform duration-300 group"
-            onClick={handleGetFittedClick}
-          >
+          <div className="transform hover:scale-105 transition-transform duration-300 group cursor-pointer">
             <div className="rhombus-btn-small relative overflow-hidden border-2 border-[#f87f01] transition-all duration-300">
               <span className="relative z-10 text-white transition-colors duration-300 group-hover:text-white">Get Fitted</span>
               <div className="absolute inset-0 bg-[#f87f01] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></div>
             </div>
-          </Link>
+          </div>
         </div>
 
         {/* Mobile Menu Button with enhanced animation */}
@@ -288,20 +256,14 @@ export default function Header() {
             </Link>
             
             <div className="pt-4 pb-2">
-              <Link 
-                href="#"
+              <div 
                 className="inline-block w-full text-center bg-[#f87f01] text-white font-semibold py-3.5 px-4 
                            transform skew-x-[-12deg] hover:bg-[#f87f01]/90 transition-all duration-300 group relative overflow-hidden
-                           border border-[#f87f01]"
-                onClick={(e) => { 
-                  handleGetFittedClick(e);
-                  setIsMenuOpen(false);
-                  setBikesDropdownOpen(false);
-                }}
+                           border border-[#f87f01] cursor-pointer"
               >
                 <span className="inline-block transform skew-x-[12deg] relative z-10 tracking-wide">Get Fitted</span>
                 <div className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-400 ease-out"></div>
-              </Link>
+              </div>
             </div>
           </div>
         )}

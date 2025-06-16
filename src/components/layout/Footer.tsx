@@ -33,6 +33,15 @@ export default function Footer() {
               Custom performance and endurance bikes engineered for speed and precision, 
               designed to fit your body perfectly.
             </p>
+            <div className="text-gray-300 space-y-2">
+              <p>Germany:<br />
+              Beedstraße 54<br />
+              40468 Düsseldorf, Germany</p>
+              <p>USA:<br />
+              43313 Woodward Ave. #1021<br />
+              Bloomfield, Michigan 48302, US</p>
+              <p>Email: sales@schonmobility.com</p>
+            </div>
           </div>
           
           <div className="md:col-span-8">
@@ -75,6 +84,14 @@ export default function Footer() {
                       <span className="absolute h-0.5 w-0 bg-[#f87f01] bottom-0 left-0 group-hover:w-full transition-all duration-300 ease-out"></span>
                     </Link>
                   </li>
+                  <li>
+                    <Link href="/saddles" className="group relative py-2 px-1 overflow-hidden flex items-center">
+                      <span className="font-medium text-gray-300 group-hover:text-[#f87f01] transition-all duration-300 ease-out tracking-wide">
+                        Saddles
+                      </span>
+                      <span className="absolute h-0.5 w-0 bg-[#f87f01] bottom-0 left-0 group-hover:w-full transition-all duration-300 ease-out"></span>
+                    </Link>
+                  </li>
                 </ul>
               </div>
               
@@ -84,14 +101,6 @@ export default function Footer() {
                   <span className="absolute bottom-0 left-0 w-1/2 h-0.5 bg-[#f87f01]"></span>
                 </h5>
                 <ul className="space-y-3">
-                  <li>
-                    <Link href="/custom" className="group relative py-2 px-1 overflow-hidden flex items-center">
-                      <span className="font-medium text-gray-300 group-hover:text-[#f87f01] transition-all duration-300 ease-out tracking-wide">
-                        Custom Sizing
-                      </span>
-                      <span className="absolute h-0.5 w-0 bg-[#f87f01] bottom-0 left-0 group-hover:w-full transition-all duration-300 ease-out"></span>
-                    </Link>
-                  </li>
                   <li>
                     <Link href="/faq" className="group relative py-2 px-1 overflow-hidden flex items-center">
                       <span className="font-medium text-gray-300 group-hover:text-[#f87f01] transition-all duration-300 ease-out tracking-wide">
@@ -109,7 +118,7 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/contact" className="group relative py-2 px-1 overflow-hidden flex items-center">
+                    <Link href="/company" className="group relative py-2 px-1 overflow-hidden flex items-center">
                       <span className="font-medium text-gray-300 group-hover:text-[#f87f01] transition-all duration-300 ease-out tracking-wide">
                         Contact Us
                       </span>
@@ -129,14 +138,6 @@ export default function Footer() {
                     <Link href="/about" className="group relative py-2 px-1 overflow-hidden flex items-center">
                       <span className="font-medium text-gray-300 group-hover:text-[#f87f01] transition-all duration-300 ease-out tracking-wide">
                         About Us
-                      </span>
-                      <span className="absolute h-0.5 w-0 bg-[#f87f01] bottom-0 left-0 group-hover:w-full transition-all duration-300 ease-out"></span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/technology" className="group relative py-2 px-1 overflow-hidden flex items-center">
-                      <span className="font-medium text-gray-300 group-hover:text-[#f87f01] transition-all duration-300 ease-out tracking-wide">
-                        Our Technology
                       </span>
                       <span className="absolute h-0.5 w-0 bg-[#f87f01] bottom-0 left-0 group-hover:w-full transition-all duration-300 ease-out"></span>
                     </Link>
@@ -166,23 +167,12 @@ export default function Footer() {
         <div className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 mb-4 md:mb-0">&copy; {currentYear} SchönMO. All rights reserved.</p>
           <div className="flex items-center">
-            <Link 
-              href="#" 
-              className="transform hover:scale-105 transition-transform duration-300 group"
-              onClick={(e) => {
-                e.preventDefault();
-                const sections = document.querySelectorAll('section');
-                const lastSection = sections[sections.length - 1];
-                if (lastSection) {
-                  lastSection.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-            >
+            <div className="transform hover:scale-105 transition-transform duration-300 group cursor-pointer">
               <div className="rhombus-btn-small relative overflow-hidden border-2 border-[#f87f01] transition-all duration-300">
                 <span className="relative z-10 text-white transition-colors duration-300 group-hover:text-white">Get Fitted</span>
                 <div className="absolute inset-0 bg-[#f87f01] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></div>
               </div>
-            </Link>
+            </div>
           </div>
         </div>
       </div>

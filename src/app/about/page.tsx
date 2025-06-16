@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export default function AboutPage() {
@@ -232,28 +231,10 @@ export default function AboutPage() {
               Our <span className="text-[#f87f01]">Commitment</span> to You
             </h2>
             <div className="w-16 md:w-24 h-1 bg-[#f87f01] mx-auto mb-5 md:mb-8"></div>
-            <p className="text-base md:text-xl text-gray-300 mb-8 md:mb-10">
+            <p className="text-base md:text-xl text-gray-300">
               Every SchönMO customer is part of our extended family. We don&apos;t just sell you a bike; 
               we welcome you into a community of passionate riders and dedicated craftspeople.
             </p>
-            
-            <motion.div
-              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-block"
-            >
-              <Link href="/custom">
-                <div className="rhombus-btn-primary relative overflow-hidden group text-sm md:text-base px-4 py-2 md:px-6 md:py-3">
-                  <span className="relative z-10">Experience the Difference</span>
-                  <motion.div 
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "0%" }}
-                    transition={{ duration: 0.4 }}
-                    className="absolute inset-0 bg-white/20"
-                  ></motion.div>
-                </div>
-              </Link>
-            </motion.div>
           </div>
         </div>
       </section>
