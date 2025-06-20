@@ -74,23 +74,6 @@ export default function Header() {
             >
               <div className="p-1"> {/* Inner padding for content */}
                 <Link 
-                  href="/bikes/endurance" 
-                  className="block hover:bg-[#f87f01]/5 transition-all duration-200 rounded-md m-1"
-                  onClick={() => setBikesDropdownOpen(false)}
-                >
-                  <div className="p-4 group flex gap-4 items-center">
-                    <div className="flex-1">
-                      <h4 className="text-[#f87f01] font-semibold text-sm sm:text-base transition-colors duration-300 group-hover:text-[#f87f01]">
-                        Gravel - SchönMO One Adventure
-                      </h4>
-                      <p className="text-xs text-gray-600 group-hover:text-gray-800 mt-1 transition-colors duration-300">Conquer any terrain with our versatile gravel bike, built for adventure.</p>
-                    </div>
-                  </div>
-                </Link>
-                
-                <div className="h-px bg-gray-200 mx-4 my-1"></div>
-                
-                <Link 
                   href="/bikes/performance" 
                   className="block hover:bg-[#f87f01]/5 transition-all duration-200 rounded-md m-1"
                   onClick={() => setBikesDropdownOpen(false)}
@@ -101,6 +84,23 @@ export default function Header() {
                         Road - SchönMO One Road
                       </h4>
                       <p className="text-xs text-gray-600 group-hover:text-gray-800 mt-1 transition-colors duration-300">Experience pure speed with our flagship road bike, engineered for peak performance.</p>
+                    </div>
+                  </div>
+                </Link>
+                
+                <div className="h-px bg-gray-200 mx-4 my-1"></div>
+                
+                <Link 
+                  href="/bikes/endurance" 
+                  className="block hover:bg-[#f87f01]/5 transition-all duration-200 rounded-md m-1"
+                  onClick={() => setBikesDropdownOpen(false)}
+                >
+                  <div className="p-4 group flex gap-4 items-center">
+                    <div className="flex-1">
+                      <h4 className="text-[#f87f01] font-semibold text-sm sm:text-base transition-colors duration-300 group-hover:text-[#f87f01]">
+                        Gravel - SchönMO One Adventure
+                      </h4>
+                      <p className="text-xs text-gray-600 group-hover:text-gray-800 mt-1 transition-colors duration-300">Conquer any terrain with our versatile gravel bike, built for adventure.</p>
                     </div>
                   </div>
                 </Link>
@@ -197,18 +197,6 @@ export default function Header() {
                             ${bikesDropdownOpen ? 'max-h-96 opacity-100 pt-1 pb-2' : 'max-h-0 opacity-0'}`}
               >
                 <Link 
-                  href="/bikes/endurance" 
-                  className="block"
-                  onClick={() => { setIsMenuOpen(false); setBikesDropdownOpen(false); }}
-                >
-                  <div className="py-2.5 border-l-2 border-gray-300 pl-4 hover:border-[#f87f01] group rounded-r-md hover:bg-[#f87f01]/5 transition-all duration-200">
-                    <div>
-                      <h4 className="text-[#f87f01] font-medium transition-colors duration-200">Gravel</h4>
-                      <p className="text-sm text-gray-600 group-hover:text-gray-800">SchönMO Adventure</p>
-                    </div>
-                  </div>
-                </Link>
-                <Link 
                   href="/bikes/performance" 
                   className="block"
                   onClick={() => { setIsMenuOpen(false); setBikesDropdownOpen(false); }}
@@ -217,6 +205,18 @@ export default function Header() {
                     <div>
                       <h4 className="text-[#f87f01] font-medium transition-colors duration-200">Road</h4>
                       <p className="text-sm text-gray-600 group-hover:text-gray-800">SchönMO Performance</p>
+                    </div>
+                  </div>
+                </Link>
+                <Link 
+                  href="/bikes/endurance" 
+                  className="block"
+                  onClick={() => { setIsMenuOpen(false); setBikesDropdownOpen(false); }}
+                >
+                  <div className="py-2.5 border-l-2 border-gray-300 pl-4 hover:border-[#f87f01] group rounded-r-md hover:bg-[#f87f01]/5 transition-all duration-200">
+                    <div>
+                      <h4 className="text-[#f87f01] font-medium transition-colors duration-200">Gravel</h4>
+                      <p className="text-sm text-gray-600 group-hover:text-gray-800">SchönMO Adventure</p>
                     </div>
                   </div>
                 </Link>
